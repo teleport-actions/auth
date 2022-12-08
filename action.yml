@@ -1,0 +1,19 @@
+name: Teleport Auth
+author: Gravitational, Inc.
+description: Uses Machine ID to fetch credentials for use with `tctl` and `tsh`. Automatically configures `tctl` and `tsh` to use these credentials in following steps.
+inputs:
+    certificate-ttl:
+        description: Specify the length that the generated credentials should be valid for. Defaults to "1h"
+        required: false
+    proxy:
+        description: Specify the address of your Teleport Proxy.
+        required: true
+    token:
+        description: Specify the Teleport token to use to join.
+        required: true
+runs:
+    using: node16
+    main: dist/index.js
+branding:
+    color: purple
+    icon: terminal
