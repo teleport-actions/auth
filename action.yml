@@ -1,6 +1,6 @@
 name: Teleport Auth
 author: Gravitational, Inc.
-description: Uses Machine ID to fetch credentials for use with `tctl` and `tsh`. Automatically configures `tctl` and `tsh` to use these credentials in following steps.
+description: Authenticates your workflow so it can use Teleport's `tctl` and `tsh` with the magic of Machine ID.
 inputs:
     certificate-ttl:
         description: Specify the length that the generated credentials should be valid for. Defaults to "1h"
