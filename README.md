@@ -56,3 +56,8 @@ steps:
 
 Note that `tsh` and `tctl` require the flag pointing at the identity file and
 `tctl` also requires the address of the Proxy or Auth Server to be provided.
+
+## Next steps
+
+Read the `teleport-actions/auth` getting started guide:
+<https://goteleport.com/docs/machine-id/guides/github-actions/>
