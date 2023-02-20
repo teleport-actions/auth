@@ -32,26 +32,33 @@ Pre-requisites:
 Example usage:
 
 ```yaml
-steps:
-  - name: Install Teleport
-    uses: teleport-actions/setup@v1
-    with:
-      version: 11.0.3
-  - name: Authorize against Teleport
-    id: auth
-    uses: teleport-actions/auth@v1
-    with:
-      # Specify the publically accessible address of your Teleport proxy.
-      proxy: tele.example.com:443
-      # Specify the name of the join token for your bot.
-      token: my-github-join-token-name
-      # Specify the length of time that the generated credentials should be
-      # valid for. This is optional and defaults to "1h"
-      certificate-ttl: 1h
-  - name: List nodes (tsh)
-    run: tsh -i ${{ steps.auth.outputs.identity-file }} ls
-  - name: List nodes (tctl)
-    run: tctl -i ${{ steps.auth.outputs.identity-file }} --auth-server tele.example.com:443 nodes ls
+on:
+  workflow_dispatch: {}
+jobs:
+  demo-auth:
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+    steps:
+      - name: Install Teleport
+        uses: teleport-actions/setup@v1
+        with:
+          version: 11.0.3
+      - name: Authorize against Teleport
+        id: auth
+        uses: teleport-actions/auth@v1
+        with:
+          # Specify the publically accessible address of your Teleport proxy.
+          proxy: tele.example.com:443
+          # Specify the name of the join token for your bot.
+          token: my-github-join-token-name
+          # Specify the length of time that the generated credentials should be
+          # valid for. This is optional and defaults to "1h"
+          certificate-ttl: 1h
+      - name: List nodes (tsh)
+        run: tsh -i ${{ steps.auth.outputs.identity-file }} ls
+      - name: List nodes (tctl)
+        run: tctl -i ${{ steps.auth.outputs.identity-file }} --auth-server tele.example.com:443 nodes ls
 ```
 
 Note that `tsh` and `tctl` require the flag pointing at the identity file and
