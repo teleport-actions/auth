@@ -20,6 +20,7 @@ used with other Teleport client tools such as `tsh` and `tctl`.
 The action has the following outputs:
 
 - `identity-file`: the path to the identity file which can be used with `tctl` and `tsh`.
+- `ssh-config`: the path to the generated SSH config which can be used with `ssh`.
 
 Pre-requisites:
 
@@ -59,6 +60,8 @@ jobs:
         run: tsh -i ${{ steps.auth.outputs.identity-file }} ls
       - name: List nodes (tctl)
         run: tctl -i ${{ steps.auth.outputs.identity-file }} --auth-server tele.example.com:443 nodes ls
+      - name: Use OpenSSH with output config
+        run: ssh -F ${{ steps.auth.outputs.ssh-config }} user@host "echo foobar"
 ```
 
 Note that `tsh` and `tctl` require the flag pointing at the identity file and

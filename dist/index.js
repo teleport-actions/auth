@@ -12558,7 +12558,9 @@ async function run() {
     const configPath = await writeConfiguration(config);
     await execute(configPath);
     const identityFilePath = external_path_default().join(destinationPath, 'identity');
+    const sshConfigFilePath = external_path_default().join(destinationPath, 'ssh_config');
     core.setOutput('identity-file', identityFilePath);
+    core.setOutput('ssh-config', sshConfigFilePath);
     core.exportVariable('TELEPORT_PROXY', sharedInputs.proxy);
     core.exportVariable('TELEPORT_AUTH_SERVER', sharedInputs.proxy);
     core.exportVariable('TELEPORT_IDENTITY_FILE', identityFilePath);
