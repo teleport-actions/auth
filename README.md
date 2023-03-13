@@ -44,7 +44,7 @@ jobs:
       - name: Install Teleport
         uses: teleport-actions/setup@v1
         with:
-          version: 11.0.3
+          version: 12.1.0
       - name: Authorize against Teleport
         id: auth
         uses: teleport-actions/auth@v1
