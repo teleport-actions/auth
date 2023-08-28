@@ -12,7 +12,7 @@
 
 > Read our Documentation: <https://goteleport.com/docs/getting-started/>
 
-# `teleport-actions/auth`
+# `teleport-actions/auth@v2`
 
 `auth` uses Teleport Machine ID to generate a set of credentials which can be
 used with other Teleport client tools such as `tsh` and `tctl`.
@@ -24,7 +24,9 @@ The action has the following outputs:
 
 Pre-requisites:
 
-- Teleport 11 or above must be used.
+- **Teleport 14 or above must be used.** Use
+  [`teleport-actions/auth@v1`](https://github.com/teleport-actions/auth/tree/v1)
+  for compatability with older versions of Teleport.
 - Teleport binaries must already be installed in the job environment.
 - You must have created a bot and created a GitHub join token that allows that
   bot to join.
@@ -44,10 +46,10 @@ jobs:
       - name: Install Teleport
         uses: teleport-actions/setup@v1
         with:
-          version: 12.1.0
+          version: 14.0.0
       - name: Authorize against Teleport
         id: auth
-        uses: teleport-actions/auth@v1
+        uses: teleport-actions/auth@v2
         with:
           # Specify the publically accessible address of your Teleport proxy.
           proxy: tele.example.com:443
