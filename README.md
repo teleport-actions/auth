@@ -73,6 +73,28 @@ jobs:
 Note that `tsh` and `tctl` require the flag pointing at the identity file and
 `tctl` also requires the address of the Proxy or Auth Server to be provided.
 
+## Environment Variables
+
+By default, this action will set the following environment variables:
+
+- `TELEPORT_AUTH_SERVER`: the address of the Teleport Auth Server.
+- `TELEPORT_PROXY`: the address of the Teleport Proxy.
+- `TELEPORT_IDENTITY_FILE`: the path to the identity file.
+
+This will automatically configure tools like `tsh` and `tctl` to use the
+generated credentials. However, this can cause issues if you intend to invoke
+`tbot` multiple times.
+
+You can disable this behaviour by setting the `disable-env-vars` input to
+`true`.
+
+## Outputs
+
+This action will output the following values:
+
+- `identity-file`: the path to the identity file.
+- `ssh-config`: the path to the generated SSH config.
+
 ## Next steps
 
 Read the `teleport-actions/auth` getting started guide:
