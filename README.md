@@ -17,11 +17,6 @@
 `auth` uses Teleport Machine ID to generate a set of credentials which can be
 used with other Teleport client tools such as `tsh` and `tctl`.
 
-The action has the following outputs:
-
-- `identity-file`: the path to the identity file which can be used with `tctl` and `tsh`.
-- `ssh-config`: the path to the generated SSH config which can be used with `ssh`.
-
 Pre-requisites:
 
 - **Teleport 14 or above must be used.** Use
@@ -92,6 +87,7 @@ You can disable this behaviour by setting the `disable-env-vars` input to
 
 This action will output the following values:
 
+- `destination-dir`: the path to the tbot destination folder.
 - `identity-file`: the path to the identity file.
 - `ssh-config`: the path to the generated SSH config.
 
