@@ -19,7 +19,7 @@ used with other Teleport client tools such as `tsh` and `tctl`.
 
 Pre-requisites:
 
-- **Teleport 14 or above must be used.** Use
+- **Teleport 16 or above must be used.** Use
   [`teleport-actions/auth@v1`](https://github.com/teleport-actions/auth/tree/v1)
   for compatability with older versions of Teleport.
 - Teleport binaries must already be installed in the job environment.
@@ -41,7 +41,10 @@ jobs:
       - name: Install Teleport
         uses: teleport-actions/setup@v1
         with:
-          version: 14.0.0
+          # specify version as "auto" and provide the address of your Teleport
+          # proxy using the "proxy" input.
+          version: auto
+          proxy: tele.example.com:443
       - name: Authorize against Teleport
         id: auth
         uses: teleport-actions/auth@v2
@@ -67,6 +70,20 @@ jobs:
 
 Note that `tsh` and `tctl` require the flag pointing at the identity file and
 `tctl` also requires the address of the Proxy or Auth Server to be provided.
+
+## Inputs
+
+The following inputs are required:
+
+- `proxy`: String. The publically accessible address of your Teleport Proxy.
+- `token`: String. The name of the GitHub join token for your bot.
+
+The following inputs are optional:
+
+- `allow-reissue`: Boolean. If set to `true`, the action will issue an identity
+  file that permits reissuance. This allows the identity file to be used with
+  `tsh` commands that require new certificates to be issued, such as
+  `tsh db login`.
 
 ## Environment Variables
 

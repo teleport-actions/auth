@@ -15751,7 +15751,7 @@ exports.visitAsync = visitAsync;
 /***/ ((module) => {
 
 "use strict";
-module.exports = JSON.parse('{"name":"auth","version":"2.0.4","license":"Apache-2.0","repository":"https://github.com/teleport-actions/auth.git","scripts":{"build":"ncc build ./src/index.ts -o dist"},"dependencies":{"@actions/core":"^1.10.0","@actions/tool-cache":"^2.0.1"},"private":true,"devDependencies":{"@types/node":"^20.11.16"}}');
+module.exports = JSON.parse('{"name":"auth","version":"2.1.0","license":"Apache-2.0","repository":"https://github.com/teleport-actions/auth.git","scripts":{"build":"ncc build ./src/index.ts -o dist"},"dependencies":{"@actions/core":"^1.10.0","@actions/tool-cache":"^2.0.1"},"private":true,"devDependencies":{"@types/node":"^20.11.16"}}');
 
 /***/ })
 
@@ -15996,9 +15996,15 @@ async function ensureMinimumVersion(minimumVersion) {
 
 
 const { version } = __nccwpck_require__(4147);
+function getInputs() {
+    return {
+        allowReissue: core.getBooleanInput('allow-reissue'),
+    };
+}
 async function run() {
-    await ensureMinimumVersion('14.0.0');
+    await ensureMinimumVersion('16.0.0');
     const sharedInputs = getSharedInputs();
+    const inputs = getInputs();
     const config = baseConfigurationFromSharedInputs(sharedInputs);
     const destinationPath = await makeTempDirectory();
     const output = {
@@ -16010,6 +16016,14 @@ async function run() {
         },
         roles: [], // Use all assigned to bot,
     };
+    // We only set `allow_reissue` to an explicit value if the input is set to
+    // true. This is because only tbot 17.2.9 and later supports this field, and,
+    // explicitly setting the field to false would cause older tbot versions to
+    // fail to parse. At a later date, we could remove this check and explicitly
+    // set the value to true. Consider this from the v19 release onwards.
+    if (inputs.allowReissue) {
+        output.allow_reissue = true;
+    }
     config.outputs.push(output);
     const configPath = await writeConfiguration(config);
     const env = baseEnvFromSharedInputs(sharedInputs, 'gha:teleport-actions/auth', version);

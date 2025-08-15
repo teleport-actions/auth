@@ -2,6 +2,9 @@ name: Teleport Auth
 author: Gravitational, Inc.
 description: Authenticates your workflow so it can use Teleport's `tctl` and `tsh` with the magic of Machine ID.
 inputs:
+    allow-reissue:
+        description: Allows the generated identity file to be reissued by other tools. This enables it to work correctly with commands like `tsh db login`. Requires V17.2.8 or later.
+        default: "false"
     anonymous-telemetry:
         description: Enables anonymous telemetry. See https://goteleport.com/docs/machine-id/reference/telemetry/ for more information.
         required: false
