@@ -84,6 +84,9 @@ The following inputs are optional:
   file that permits reissuance. This allows the identity file to be used with
   `tsh` commands that require new certificates to be issued, such as
   `tsh db login`.
+- `disable-env-vars`: Boolean. If set to true, the action will not set
+  `TELEPORT_AUTH_SERVER`, `TELEPORT_PROXY` and `TELEPORT_IDENTITY_FILE`
+  environment variables.
 
 ## Environment Variables
 
